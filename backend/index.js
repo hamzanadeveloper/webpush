@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const webpush = require('web-push')
 const bodyParser = require("body-parser");
 
 const app = express();
@@ -24,5 +25,29 @@ app.post("/save-subscription", async (req, res) => {
   await saveToDatabase(subscription); //Method to save the subscription to Database
   res.json({ message: "success" });
 });
+
+const vapidKeys = {
+  publicKey:
+      'BMECH3RAG2GuHkC2rFhnBSeQn6Wuu8ZRTKgCtX4L0oXXr5IZjHzuroKnlwJkCUSAwNxsja1oNJT-8hBy2O1vy2E',
+  privateKey: 'ct-_qhDgUzRwMTKpGxWgc2-1iFCveneMFPJwUHBQZoc',
+}
+
+//setting our previously generated VAPID keys
+webpush.setVapidDetails(
+    'mailto:hamza.n.arshadwork@gmail.com',
+    vapidKeys.publicKey,
+    vapidKeys.privateKey
+)
+//function to send the notification to the subscribed device
+const sendNotification = (subscription, dataToSend='') => {
+  webpush.sendNotification(subscription, dataToSend)
+}
+
+app.get('/send-notification', (req, res) => {
+  const subscription = dummyDb.subscription //get subscription from your databse here.
+  const message = 'Hello World'
+  sendNotification(subscription, message)
+  res.json({ message: 'message sent' })
+})
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
