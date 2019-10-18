@@ -1,23 +1,4 @@
-# Demo for the Web Push blog
+# Web Push Testing
 
-This is the working demo code for the blog post here:
+References: [https://blog.atulr.com/web-notifications](https://blog.atulr.com/web-notifications)
 
-[https://blog.atulr.com/web-notifications](https://blog.atulr.com/web-notifications)
-
-To launch backend:
-
-```sh
-cd backend
-npm install
-node index.js
-```
-
-To launch frontend:
-
-```sh
-cd frontend
-npm install -g http-server
-http-server
-```
-# webpush
-# webpush
