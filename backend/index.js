@@ -23,7 +23,7 @@ const saveToDatabase = async subscription => {
 app.post("/save-subscription", async (req, res) => {
   const subscription = req.body;
   await saveToDatabase(subscription); //Method to save the subscription to Database
-  res.json({ message: "success" });
+  res.json({ message: subscription });
 });
 
 const vapidKeys = {
@@ -47,7 +47,7 @@ app.get('/send-notification', (req, res) => {
   const subscription = dummyDb.subscription //get subscription from your databse here.
   const message = 'Hello World'
   sendNotification(subscription, message)
-  res.json({ message: 'message sent' })
+  res.json({ message: subscription })
 })
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
